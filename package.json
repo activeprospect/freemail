@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/willwhite/freemail.git"
+    "url": "git://github.com/activeprospect/freemail.git"
   },
   "dependencies": {
     "tldjs": "^1.5.2"
