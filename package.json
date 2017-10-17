@@ -1,17 +1,16 @@
 {
-  "name": "freemail",
+  "name": "@activeprospect/freemail",
   "version": "1.4.0",
   "description": "A database of free and disposable email domains and a handy Node.js module for querying it.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
-  "author": "Will White <will@mapbox.com>",
+  "author": "Will White <will@mapbox.com>, Daniel St. Jules, Blake Sager",
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.1.2",
-    "mocha": "^4.0.1",
-    "tape": "^3.5.0"
+    "mocha": "^4.0.1"
   },
   "repository": {
     "type": "git",
