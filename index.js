@@ -5,17 +5,17 @@ var disposable = load('/data/disposable.txt');
 var free = extend(load('/data/free.txt'), disposable);
 
 function isFree(email) {
-    if (typeof email !== 'string') throw new TypeError('email must be a string');
-    var split = email.split('@');
-    var domain = getDomain(split[1] || split[0]);
-    return !!(domain && free[domain]);
+  if (typeof email !== 'string') throw new TypeError('email must be a string');
+  var split = email.split('@');
+  var domain = getDomain(split[1] || split[0]);
+  return !!(domain && free[domain]);
 }
 
 function isDisposable(email) {
-    if (typeof email !== 'string') throw new TypeError('email must be a string');
-    var split = email.split('@');
-    var domain = getDomain(split[1] || split[0]);
-    return !!(domain && disposable[domain]);
+  if (typeof email !== 'string') throw new TypeError('email must be a string');
+  var split = email.split('@');
+  var domain = getDomain(split[1] || split[0]);
+  return !!(domain && disposable[domain]);
 }
 
 function getDomain(host) {
@@ -52,6 +52,6 @@ function extend(a, b) {
 }
 
 module.exports = {
-    isFree: isFree,
-    isDisposable: isDisposable
+  isFree: isFree,
+  isDisposable: isDisposable
 };
