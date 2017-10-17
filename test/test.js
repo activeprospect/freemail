@@ -1,32 +1,26 @@
-var test = require('tape');
-var freemail = require('..');
+const assert = require('chai').assert;
+const freemail = require('../index');
 
-test('gmail.com should be free', function(t) {
-    t.plan(1);
-    t.equal(freemail.isFree('smith@gmail.com'), true);
-});
+describe('Freemail', ()=> {
 
-test('gmail.com should be free with domain only', function(t) {
-    t.plan(1);
-    t.equal(freemail.isFree('gmail.com'), true);
-});
+  it('should correctly determine if email account is free', () => {
+    assert.equal(freemail.isFree('smith@gmail.com'), true);
+    assert.equal(freemail.isFree('test@activeprospect.com'), false);
+  });
 
-test('fb.com should not be free', function(t) {
-    t.plan(1);
-    t.equal(freemail.isFree('fb.com'), false);
-});
+  it('should correctly determine if email account is free with domain only', () => {
+    assert.equal(freemail.isFree('gmail.com'), true);
+    assert.equal(freemail.isFree('activeprospect.com'), false);
+  });
 
-test('mailinater.com should be free', function(t) {
-    t.plan(1);
-    t.equal(freemail.isFree('smith@mailinater.com'), true);
-});
+  it('should correctly determine if email is disposable', () => {
+    assert.equal(freemail.isDisposable('smith@mailinator.com'), true);
+    assert.equal(freemail.isFree('test@activeprospect.com'), false);
+  });
 
-test('mailinater.com should be disposable', function(t) {
-    t.plan(1);
-    t.equal(freemail.isDisposable('smith@mailinater.com'), true);
-});
+  it('should correctly determine if email account is disposable with domain only', () => {
+    assert.equal(freemail.isDisposable('spamcannon.com'), true);
+    assert.equal(freemail.isDisposable('gmail.com'), false);
+  });
 
-test('gmail.com should not be disposable', function(t) {
-    t.plan(1);
-    t.equal(freemail.isDisposable('smith@gmail.com'), false);
 });
