@@ -29,6 +29,13 @@ describe('isDisposable', ()=> {
 
 describe('handleFreemailValidation', () => {
 
+  it('should return an object with appropriate keys and values', () => {
+    assert.isObject(freemail.handleFreemailValidation('blake@mailinator.com'));
+    assert.hasAllKeys(freemail.handleFreemailValidation('blake@mailinator.com'), ['isFree', 'isDisposable']);
+    assert.isBoolean(freemail.handleFreemailValidation('blake@mailinator.com').isFree);
+    assert.isBoolean(freemail.handleFreemailValidation('blake@mailinator.com').isDisposable);
+  });
+
   it('should return the same results as isFree and isDisposable', () => {
     let disposable = {isFree: freemail.isFree('blake@mailinator.com'), isDisposable: freemail.isDisposable('blake@mailinator.com')};
     let free = {isFree: freemail.isFree('blake@gmail.com'), isDisposable: freemail.isDisposable('blake@gmail.com')};
@@ -37,23 +44,5 @@ describe('handleFreemailValidation', () => {
     assert.deepEqual(disposable, freemail.handleFreemailValidation('blake@mailinator.com'));
     assert.deepEqual(free, freemail.handleFreemailValidation('blake@gmail.com'));
     assert.deepEqual(paid, freemail.handleFreemailValidation('test@activeprospect.com'));
-  });
-
-  it ('should correctly validate \'smith@mailinator.com\'', () => {
-    let emailAccountDetails = freemail.handleFreemailValidation('smith@mailinator.com');
-    assert.equal(emailAccountDetails.isDisposable, true);
-    assert.equal(emailAccountDetails.isFree, true);
-  });
-
-  it('should correctly validate \'smith@gmail.com\'', () => {
-    let emailAccountDetails = freemail.handleFreemailValidation('smith@gmail.com');
-    assert.equal(emailAccountDetails.isDisposable, false);
-    assert.equal(emailAccountDetails.isFree, true);
-  });
-
-  it('should correctly validate \'test@activeprospect.com\'', () => {
-    let emailAccountDetails = freemail.handleFreemailValidation('test@activeprospect.com');
-    assert.equal(emailAccountDetails.isDisposable, false);
-    assert.equal(emailAccountDetails.isFree, false);
   });
 });

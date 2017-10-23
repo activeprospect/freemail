@@ -19,22 +19,13 @@ function isDisposable(email) {
 }
 
 function handleFreemailValidation(email) {
-  if (isDisposable(email)) {
-    return {
-      isDisposable: true,
-      isFree: true
-    };
-  } else if (isFree(email)) {
-    return {
-      isFree: true,
-      isDisposable: false
-    };
-  } else {
-    return {
-      isFree: false,
-      isDisposable: false
-    };
-  }
+  if (typeof email !== 'string') throw new TypeError('email must be a string');
+  var split = email.split('@');
+  var domain = getDomain(split[1] || split[0]);
+  return {
+    isFree: !!(domain && free[domain]),
+    isDisposable: !!(domain && disposable[domain])
+  };
 }
 
 function getDomain(host) {
