@@ -18,6 +18,25 @@ function isDisposable(email) {
   return !!(domain && disposable[domain]);
 }
 
+function handleFreemailValidation(email) {
+  if (isDisposable(email)) {
+    return {
+      isDisposable: true,
+      isFree: true
+    };
+  } else if (isFree(email)) {
+    return {
+      isFree: true,
+      isDisposable: false
+    };
+  } else {
+    return {
+      isFree: false,
+      isDisposable: false
+    };
+  }
+}
+
 function getDomain(host) {
   var split = host.split('.');
   // Performance optimization for .com TLD
@@ -53,5 +72,6 @@ function extend(a, b) {
 
 module.exports = {
   isFree: isFree,
-  isDisposable: isDisposable
+  isDisposable: isDisposable,
+  handleFreemailValidation: handleFreemailValidation
 };
